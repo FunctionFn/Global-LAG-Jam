@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
 
     public GameObject mainCamera;
     public GameObject missilePrefab;
+    
 
     public Transform playerCenter;
     public float gravity;
     public float jumpSpeed;
 
     public Transform missileSpawnLocation;
+    public Transform VIPHoldLocation;
 
     public float speed;
     public float airSpeedModifier;
@@ -282,6 +284,13 @@ public class PlayerController : MonoBehaviour
             FireTimer = FireTime;
         }
         
+    }
+
+    public void Grab(Pickupable p)
+    {
+        p.GetComponent<Rigidbody>().transform.position = VIPHoldLocation.position;
+        p.gameObject.transform.SetParent(this.gameObject.transform);
+
     }
 
     void OnTriggerEnter(Collider other)
