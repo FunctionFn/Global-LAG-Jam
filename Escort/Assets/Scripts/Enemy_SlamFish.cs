@@ -3,10 +3,15 @@ using System.Collections;
 
 public class Enemy_SlamFish : MonoBehaviour {
 
+    public GameObject wave;
+
+    public float jumpHeight = 200;
+
     private int jumpTimer;
     private int jumpCount;
 
-    public float jumpHeight;
+    private bool grounded = true;
+    private bool isSlamming = false;  
 
     // Use this for initialization
     void Start ()
@@ -14,20 +19,33 @@ public class Enemy_SlamFish : MonoBehaviour {
         // Reset timer
         jumpTimer = 0;
         jumpCount = 0;
-	}
-	
-	// Update is called once per frame
-	void Update ()
+
+        // Ignore enemy bullets
+        Physics.IgnoreLayerCollision(9, gameObject.layer);
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         // Countdown until jump
         jumpTimer++;
 
+        // Check if on the ground
+        if (grounded)
+        {
+            if (isSlamming)
+            {
+                SlamWave();
+            }
+        }
+
+        // Check if it's jump time
         if (jumpTimer >= 200)
         {
             // Check if Slamming
             if (jumpCount >= 2)
             {
-                Slam();
+                SlamJump();
                 jumpCount = -1;
             }
             else
@@ -35,11 +53,13 @@ public class Enemy_SlamFish : MonoBehaviour {
                 Jump();
             }
 
+            grounded = false;
+
             jumpTimer = 0;
             jumpCount++;
         }
 
-
+    
     }
 
     void Jump()
@@ -58,12 +78,24 @@ public class Enemy_SlamFish : MonoBehaviour {
             GetComponent<Rigidbody>().AddForce(Vector3.right * jumpHeight);
         else if (direction == 3)
             GetComponent<Rigidbody>().AddForce(Vector3.left * jumpHeight);
-
     }
 
-    void Slam()
+    void SlamJump()
     {
-        // Slam!
-        GetComponent<Rigidbody>().AddForce(Vector3.up * jumpHeight * 3);
+        // Slam Jump!
+        GetComponent<Rigidbody>().AddForce(transform.up * jumpHeight * 2);
+
+        isSlamming = true;
+    }
+
+    void SlamWave()
+    {
+        Instantiate(wave, transform.position, transform.rotation);
+        isSlamming = false;
+    }
+
+    void OnCollisionEnter()
+    {
+        grounded = true;
     }
 }
