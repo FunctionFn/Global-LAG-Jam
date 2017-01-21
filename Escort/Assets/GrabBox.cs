@@ -5,12 +5,12 @@ public class GrabBox : MonoBehaviour {
 
     public PlayerController player;
 
-    public bool active;
+    public bool isactive;
 
 
 	// Use this for initialization
 	void Start () {
-        active = false;
+        isactive = false;
 	}
 	
 	// Update is called once per frame
@@ -18,9 +18,14 @@ public class GrabBox : MonoBehaviour {
 	
 	}
 
+    public void SetActive(bool b)
+    {
+        isactive = b;
+    }
+
     void OnTriggerStay(Collider other)
     {
-        if(active && other.gameObject.GetComponent<Pickupable>())
+        if(isactive && other.gameObject.GetComponent<Pickupable>())
         {
             player.Grab(other.gameObject.GetComponent<Pickupable>());
         }

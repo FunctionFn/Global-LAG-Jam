@@ -114,7 +114,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011486605772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.043, z: 0}
+  m_LocalPosition: {x: 0, y: 1.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -239,16 +239,20 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   missilePrefab: {fileID: 1000011816276132, guid: 9934efbff3871de45bead5491db78df5,
     type: 2}
+  grabBox: {fileID: 1000011281330154}
   playerCenter: {fileID: 4000013151245776}
   gravity: 20
   jumpSpeed: 10
   missileSpawnLocation: {fileID: 4000014131375244}
   VIPHoldLocation: {fileID: 4000012838728180}
+  throwForce: 723.06
   speed: 10
   airSpeedModifier: 0.75
   missileSpeed: 35
   FireTime: 0.5
+  GrabTime: 0.5
   moveDirection: {x: 0, y: 0, z: 0}
+  heldObject: {fileID: 0}
   movementState: 0
 --- !u!114 &114000013703221150
 MonoBehaviour:
@@ -262,7 +266,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 114000012954887112}
+<<<<<<< HEAD
   active: 0
+=======
+  isactive: 0
+>>>>>>> origin/master
 --- !u!143 &143000010940187226
 CharacterController:
   m_ObjectHideFlags: 1
