@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject mainCamera;
     public GameObject missilePrefab;
-    
+    public GameObject grabBox;
 
     public Transform playerCenter;
     public float gravity;
@@ -21,24 +21,28 @@ public class PlayerController : MonoBehaviour
     public Transform missileSpawnLocation;
     public Transform VIPHoldLocation;
 
+    public float throwForce;
+
     public float speed;
     public float airSpeedModifier;
     public float missileSpeed;
 
     public float FireTime;
+    public float GrabTime;
 
     float angle;
     float FireTimer;
+    float GrabTimer;
 
 
     public Vector3 moveDirection = Vector3.zero;
 
     CharacterController controller;
-    
+    public Pickupable heldObject;
 
     public enum State { NoMovement, GroundedMovement, Jumping }
-    
 
+    bool holding;
     public State movementState;
     //public CostumeEnum equippedCostume;
 
@@ -59,7 +63,7 @@ public class PlayerController : MonoBehaviour
         ChangeMovementState(State.GroundedMovement);
 
         currentHealth = maxHealth;
-
+        holding = false;
         //equippedCostume = CostumeEnum.standard;
 
         Physics.IgnoreLayerCollision(8, gameObject.layer);
@@ -86,7 +90,12 @@ public class PlayerController : MonoBehaviour
 
 
         FireTimer -= Time.deltaTime;
+        GrabTimer -= Time.deltaTime;
 
+        if(GrabTimer <= 0)
+        {
+            grabBox.GetComponent<GrabBox>().isactive = false;
+        }
     }
 
 
@@ -197,76 +206,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
- 
-
-    //void AscendMoveControl()
-    //{
-    //	moveDirection.y = ascendSpeed;
-    //}
-
-    //void DescendMoveControl()
-    //{
-    //	moveDirection.y = -descendSpeed;
-    //}
-
-    // Trigger Handling
-
-    //void OnTriggerEnter(Collider other)
-    //{
-    //	if (other.GetComponent<Trigger>())
-    //	{
-    //		other.GetComponent<Trigger>().OnActivate();
-    //	}
-    //}
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //	if (other.GetComponent<Trigger>())
-    //	{
-    //		other.GetComponent<Trigger>().OnDeactivate();
-    //	}
-    //}
-
-    // Powers
-
     void PowerUpdate()
     {
-        if (Input.GetButtonDown("Fire" + PlayerNumber))
+        if (!holding && Input.GetButtonDown("Fire" + PlayerNumber))
         {
-            
+            grabBox.GetComponent<GrabBox>().SetActive(true);
+            GrabTimer = GrabTime;
         }
-
-        //if (Input.GetButtonDown("Wind"))
-        //{
-        //	tempWind = WindBlow(windForce, false);
-        //}
-
-        //if (Input.GetButtonUp("Wind"))
-        //{
-        //	UnWindBlow(tempWind);
-        //}
-
-        //if (Input.GetButtonDown("Dash"))
-        //{
-        //	StartDash();
-        //}
-
-        ////Dash Timer
-        //if (DashTimer < DashTime)
-        //{
-        //	Dash();
-        //	DashTimer += Time.deltaTime;
-
-
-        //	if (DashTimer > DashTime)
-        //	{
-        //		EndDash();
-        //	}
-
-        //}
-
-        //if (DashCooldownTimer <= DashCooldown)
-        //	DashCooldownTimer += Time.deltaTime;
+        else if (Input.GetButtonDown("Fire" + PlayerNumber))
+        {
+            Chuck();
+        }
 
 
 
@@ -274,7 +224,7 @@ public class PlayerController : MonoBehaviour
 
     void Fireball()
     {
-        if(FireTimer <= 0)
+        if(FireTimer <= 0 && !holding)
         {
             GameObject go = (GameObject)Instantiate(missilePrefab, missileSpawnLocation.position, missileSpawnLocation.rotation);
 
@@ -288,9 +238,30 @@ public class PlayerController : MonoBehaviour
 
     public void Grab(Pickupable p)
     {
-        p.GetComponent<Rigidbody>().transform.position = VIPHoldLocation.position;
-        p.gameObject.transform.SetParent(this.gameObject.transform);
+        if (!p.held)
+        {
+            p.GetComponent<Rigidbody>().transform.position = VIPHoldLocation.position;
+            p.gameObject.transform.SetParent(this.gameObject.transform);
 
+            p.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.x, 0);
+
+            p.GetComponent<Rigidbody>().isKinematic = true;
+            p.held = true;
+            heldObject = p;
+            holding = true;
+        }
+
+    }
+
+    public void Chuck()
+    {
+        Vector3 movedirection = new Vector3(moveDirection.x, 0, moveDirection.z) * .5f;
+
+        heldObject.gameObject.transform.SetParent(null);
+        heldObject.GetComponent<Rigidbody>().isKinematic = false;
+        heldObject.GetComponent<Rigidbody>().AddForce(playerCenter.forward * throwForce + moveDirection);
+        heldObject.held = false;
+        holding = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -325,66 +296,6 @@ public class PlayerController : MonoBehaviour
         currentHealth -= dmg;
     }
 
-    //void Tether()
-    //{
-    //	ChangeMovementState(TetheredMovement);
-    //}
-
-    //void UnTether()
-    //{
-    //	ChangeMovementState(GroundedMovement);
-    //}
-
-    //GameObject WindBlow(float force, bool Dash)
-    //{
-    //	GameObject go = (GameObject)Instantiate(windPrefab, windSpawnLocation.position, mainCamera.transform.rotation);
-
-
-
-    //	go.GetComponentInChildren<Wind>().windForce = force;
-    //	if (!Dash)
-    //	{
-    //		go.transform.parent = mainCamera.transform;
-    //		go.transform.Rotate(new Vector3(350, 0, 0));
-    //	}
-    //	else
-    //	{
-    //		go.transform.localEulerAngles = new Vector3(0, go.transform.localEulerAngles.y, go.transform.localEulerAngles.z);
-    //	}
-
-    //	return go;
-    //}
-
-    //void UnWindBlow(GameObject go)
-    //{
-    //	Destroy(go.gameObject);
-    //}
-
-    // To Do:
-
-    //void StartDash()
-    //{
-    //	if (DashCooldownTimer > DashCooldown)
-    //	{
-    //		DashTimer = 0;
-    //		dashDirection = transform.forward;
-    //		dashDirection *= dashSpeed;
-    //		tempWindDash = WindBlow(dashWindForce, true);
-    //		ChangeMovementState(DashMovement);
-    //		DashCooldownTimer = 0;
-    //	}
-    //}
-
-    //void Dash()
-    //{
-    //	controller.Move(dashDirection * Time.deltaTime);
-
-    //}
-
-    //void EndDash()
-    //{
-    //	ChangeMovementState(GroundedMovement);
-    //	UnWindBlow(tempWindDash);
-    //}
+   
 }
 
