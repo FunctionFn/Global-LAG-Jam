@@ -6,8 +6,6 @@ public class Attack_EnemyWave : MonoBehaviour {
     public int waveMaxTime = 50;
 
     public int waveTimer = 0;
-
-    private bool activeWave = false;
   
 
 	// Use this for initialization

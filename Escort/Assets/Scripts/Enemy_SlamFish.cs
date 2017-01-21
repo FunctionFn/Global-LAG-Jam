@@ -19,7 +19,10 @@ public class Enemy_SlamFish : MonoBehaviour {
         // Reset timer
         jumpTimer = 0;
         jumpCount = 0;
-	}
+
+        // Ignore enemy bullets
+        Physics.IgnoreLayerCollision(9, gameObject.layer);
+    }
 
     // Update is called once per frame
     void Update ()
