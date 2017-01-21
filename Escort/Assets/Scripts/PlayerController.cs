@@ -64,21 +64,13 @@ public class PlayerController : MonoBehaviour
 
         currentHealth = maxHealth;
         holding = false;
-        //equippedCostume = CostumeEnum.standard;
 
         Physics.IgnoreLayerCollision(8, gameObject.layer);
-        //bIsNearTree = false;
-
-        //Physics.IgnoreLayerCollision(12, gameObject.layer);
-
-        //DashTimer = DashTime;
-        //DashCooldownTimer = DashCooldown;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //cowboyAnimator.SetBool("Attacking", false);
         
         ControlUpdate();
         PowerUpdate();
@@ -155,36 +147,6 @@ public class PlayerController : MonoBehaviour
             
 
     }
-
-    //void CameraControl()
-    //{
-    //	lookDirectionH = new Vector3(0, Input.GetAxis("Horizontal2"), 0);
-    //	transform.Rotate(lookDirectionH * lookSpeedH);
-
-
-    //	lookDirectionV = new Vector3(Input.GetAxis("Vertical2"), 0, 0);
-    //	cameraAxisLocation.Rotate(lookDirectionV * lookSpeedV);
-    //	//Debug.Log(cameraAxisLocation.rotation.eulerAngles.x);
-
-    //	if (cameraAxisLocation.rotation.eulerAngles.x > 270)
-    //	{
-    //		cameraAxisLocation.localEulerAngles = new Vector3(Mathf.Clamp(cameraAxisLocation.rotation.eulerAngles.x, 280, 400), cameraAxisLocation.rotation.y, cameraAxisLocation.rotation.z);
-    //	}
-    //	else
-    //	{
-    //		cameraAxisLocation.localEulerAngles = new Vector3(Mathf.Clamp(cameraAxisLocation.rotation.eulerAngles.x, -10, 80), cameraAxisLocation.rotation.y, cameraAxisLocation.rotation.z);
-    //	}
-
-
-
-
-    //	/*
-    //       lookDirectionV = Input.GetAxis("Vertical2") * lookSpeedV;
-    //       cameraRotationAxis = rightSide.position - transform.position;
-    //       mainCamera.transform.RotateAround(transform.position, cameraRotationAxis, lookDirectionV);
-    //        */
-
-    //}
 
     void HorizontalMoveControl()
     {
