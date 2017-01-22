@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013142981554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2949538, y: 1.26, z: 5.856507}
+  m_LocalPosition: {x: -0.614897, y: 1, z: 3.2600327}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -120,3 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wave: {fileID: 1000010921873144, guid: 835b04f9671b3ac48bfa5c45aeede06a, type: 2}
   jumpHeight: 200
+  contactDamage: 10

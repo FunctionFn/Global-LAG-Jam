@@ -29,12 +29,15 @@ public class PlayerController : MonoBehaviour
 
     public float FireTime;
     public float GrabTime;
+    public float DeathStunTime;
+    public float MaxHoldTime;
 
     float angle;
-    float FireTimer;
-    float GrabTimer;
-
-
+    public float FireTimer;
+    public float GrabTimer;
+    public float StunTimer;
+    public float HoldTimer;
+    
     public Vector3 moveDirection = Vector3.zero;
 
     CharacterController controller;
@@ -43,7 +46,12 @@ public class PlayerController : MonoBehaviour
     public enum State { NoMovement, GroundedMovement, Jumping }
 
     bool holding;
+    public bool beingHeld;
     public State movementState;
+
+    bool willFire;
+
+    public PlayerController holder;
     //public CostumeEnum equippedCostume;
 
     // Singleton Pattern
@@ -66,6 +74,8 @@ public class PlayerController : MonoBehaviour
         holding = false;
 
         Physics.IgnoreLayerCollision(8, gameObject.layer);
+
+        willFire = false;
     }
 
     // Update is called once per frame
@@ -77,17 +87,42 @@ public class PlayerController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            SceneManager.LoadScene("Level1");
+            Stun(DeathStunTime);
+            currentHealth = maxHealth;
         }
 
 
         FireTimer -= Time.deltaTime;
         GrabTimer -= Time.deltaTime;
-
+        HoldTimer -= Time.deltaTime;
+        StunTimer -= Time.deltaTime;
         if(GrabTimer <= 0)
         {
-            grabBox.GetComponent<GrabBox>().isactive = false;
+            if(grabBox.GetComponent<GrabBox>().isactive)
+                grabBox.GetComponent<GrabBox>().isactive = false;
         }
+
+        
+
+        if (movementState == State.NoMovement && StunTimer <= 0)
+        {
+            
+
+            if(GetComponent<CharacterController>().enabled == false)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                Destroy(GetComponent<Rigidbody>());
+                GetComponent<CharacterController>().enabled = true;
+                
+            }
+
+            ChangeMovementState(State.GroundedMovement);
+        }
+        if (beingHeld && HoldTimer <= 0)
+        {
+            holder.Chuck();
+        }
+
     }
 
 
@@ -95,7 +130,18 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeMovementState(State state)
     {
+        if(movementState == State.NoMovement && state != State.NoMovement)
+        {
+            Destroy(gameObject.GetComponent<Pickupable>());
+        }
+
         movementState = state;
+
+        if(movementState == State.NoMovement && !gameObject.GetComponent<Pickupable>())
+        {
+            gameObject.AddComponent<Pickupable>();
+        }
+
     }
 
     void ControlUpdate()
@@ -113,6 +159,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (movementState == State.GroundedMovement)
         {
+            
             HorizontalMoveControl();
             AimControl();
             //moveDirection.y = 0;
@@ -143,8 +190,11 @@ public class PlayerController : MonoBehaviour
                 ChangeMovementState(State.GroundedMovement);
             }
         }
-
-            
+        if (willFire)
+        {
+            Fireball();
+            willFire = false;
+        }
 
     }
 
@@ -161,7 +211,7 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(Input.GetAxis("RHorizontal" + PlayerNumber)) > 0.01f || Mathf.Abs(Input.GetAxis("RVertical" + PlayerNumber)) > 0.01f)
         {
             angle = Mathf.Atan2(Input.GetAxis("RHorizontal" + PlayerNumber), Input.GetAxis("RVertical" + PlayerNumber)) * Mathf.Rad2Deg;
-            Fireball();
+            willFire = true;
         }
 
 
@@ -170,23 +220,25 @@ public class PlayerController : MonoBehaviour
 
     void PowerUpdate()
     {
-        if (!holding && Input.GetButtonDown("Fire" + PlayerNumber))
+        if (movementState != State.NoMovement)
         {
-            grabBox.GetComponent<GrabBox>().SetActive(true);
-            GrabTimer = GrabTime;
+            if (!holding && Input.GetButtonDown("Fire" + PlayerNumber))
+            {
+                grabBox.GetComponent<GrabBox>().SetActive(true);
+                GrabTimer = GrabTime;
+            }
+            else if (Input.GetButtonDown("Fire" + PlayerNumber))
+            {
+                Chuck();
+            }
         }
-        else if (Input.GetButtonDown("Fire" + PlayerNumber))
-        {
-            Chuck();
-        }
-
 
 
     }
 
     void Fireball()
     {
-        if(FireTimer <= 0 && !holding)
+        if(FireTimer <= 0 && !holding && movementState != State.NoMovement)
         {
             GameObject go = (GameObject)Instantiate(missilePrefab, missileSpawnLocation.position, missileSpawnLocation.rotation);
 
@@ -202,13 +254,26 @@ public class PlayerController : MonoBehaviour
     {
         if (!p.held)
         {
-            p.GetComponent<Rigidbody>().transform.position = VIPHoldLocation.position;
-            p.gameObject.transform.SetParent(this.gameObject.transform);
+            if (p.GetComponent<Rigidbody>())
+            {
+                p.GetComponent<Rigidbody>().transform.position = VIPHoldLocation.position;
+                p.gameObject.transform.SetParent(this.gameObject.transform);
 
-            p.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.x, 0);
+                p.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.x, 0);
 
-            p.GetComponent<Rigidbody>().isKinematic = true;
-            p.held = true;
+                p.GetComponent<Rigidbody>().isKinematic = true;
+                p.held = true;
+            }
+            else if(p.GetComponent<CharacterController>())
+            {
+                p.GetComponent<CharacterController>().transform.position = VIPHoldLocation.position;
+                p.gameObject.transform.SetParent(this.gameObject.transform);
+                p.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.x, 0);
+
+                p.GetComponent<PlayerController>().OnHold();
+                p.GetComponent<PlayerController>().holder = this.gameObject.GetComponent<PlayerController>();
+
+            }
             heldObject = p;
             holding = true;
         }
@@ -217,13 +282,31 @@ public class PlayerController : MonoBehaviour
 
     public void Chuck()
     {
-        Vector3 movedirection = new Vector3(moveDirection.x, 0, moveDirection.z) * .5f;
+        Vector3 throwmove = new Vector3(moveDirection.x, 0, moveDirection.z) * .5f;
 
         heldObject.gameObject.transform.SetParent(null);
-        heldObject.GetComponent<Rigidbody>().isKinematic = false;
-        heldObject.GetComponent<Rigidbody>().AddForce(playerCenter.forward * throwForce + moveDirection);
-        heldObject.held = false;
-        holding = false;
+
+        if (heldObject.GetComponent<Rigidbody>())
+        {
+            heldObject.GetComponent<Rigidbody>().isKinematic = false;
+            heldObject.GetComponent<Rigidbody>().AddForce(playerCenter.forward * throwForce + throwmove);
+            heldObject.held = false;
+            holding = false;
+        }
+        else if(heldObject.GetComponent<CharacterController>())
+        {
+            Vector3 vel = playerCenter.forward * throwForce + throwmove;
+            heldObject.GetComponent<CharacterController>().enabled = false;
+            heldObject.gameObject.AddComponent<Rigidbody>();
+            heldObject.GetComponent<Rigidbody>().AddForce(playerCenter.forward * throwForce + throwmove);
+            heldObject.held = false;
+            heldObject.GetComponent<PlayerController>().beingHeld = false;
+            holding = false;
+            heldObject.GetComponent<PlayerController>().StunTimer = 1.0f;
+            heldObject.GetComponent<PlayerController>().holder = null;
+            
+            
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -258,6 +341,23 @@ public class PlayerController : MonoBehaviour
         currentHealth -= dmg;
     }
 
+    public void Stun(float time, bool force = false)
+    {
+        ChangeMovementState(State.NoMovement);
+        if((time <= StunTimer || StunTimer <= 0) || force)
+            StunTimer = time;
+        if(holding)
+            Chuck();
+        
+    }
+
+    // ......Beeeep, your current wait time is **8 MINUTES** ...Beeeeeeep
+    public void OnHold()
+    {
+        beingHeld = true;
+        Stun(MaxHoldTime + .2f, true);
+        HoldTimer = MaxHoldTime;
+    }
    
 }
 

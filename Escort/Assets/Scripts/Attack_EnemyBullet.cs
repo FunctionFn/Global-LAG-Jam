@@ -5,7 +5,7 @@ public class Attack_EnemyBullet : MonoBehaviour
 {
 
     //public ParticleSystem hitPC;
-
+    public int dmg;
 
     // Update is called once per frame
     void Update()
@@ -27,7 +27,7 @@ public class Attack_EnemyBullet : MonoBehaviour
     {
         if (col.gameObject.GetComponent<PlayerController>())
         {
-            col.gameObject.GetComponent<PlayerController>().Damage(1);
+            col.gameObject.GetComponent<PlayerController>().Damage(dmg);
             Destroy(gameObject);
         }
 
