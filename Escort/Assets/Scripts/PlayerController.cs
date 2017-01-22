@@ -224,6 +224,12 @@ public class PlayerController : MonoBehaviour
         heldObject.GetComponent<Rigidbody>().AddForce(playerCenter.forward * throwForce + moveDirection);
         heldObject.held = false;
         holding = false;
+
+        if(heldObject.gameObject.GetComponent<VIP>())
+        {
+            heldObject.gameObject.GetComponent<VIP>().GetUp();
+        }
+
     }
 
     void OnTriggerEnter(Collider other)
