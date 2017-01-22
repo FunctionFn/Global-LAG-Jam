@@ -58,4 +58,12 @@ public class VIP : MonoBehaviour {
     {
         gettingUp = true;
     }
+
+    void OnCollisionStay(Collision other)
+    {
+        if(other.gameObject.tag == "Kill VIP")
+        {
+            PlayerManager.Inst.GameOver();
+        }
+    }
 }

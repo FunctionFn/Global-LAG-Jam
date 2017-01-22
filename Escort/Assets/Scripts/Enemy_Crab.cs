@@ -25,7 +25,7 @@ public class Enemy_Crab : MonoBehaviour {
         FireTimer = 0.0f;
 
         // Ignore enemy bullets
-        Physics.IgnoreLayerCollision(9, gameObject.layer);
+        //Physics.IgnoreLayerCollision(9, gameObject.layer);
     }
 	
 	// Update is called once per frame

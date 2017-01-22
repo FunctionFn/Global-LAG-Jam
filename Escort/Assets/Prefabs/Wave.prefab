@@ -92,6 +92,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveMaxTime: 200
   waveTimer: 0
+  contactDamage: 1
+  numProjectiles: 0
+  missilePrefab: {fileID: 1000012101632802, guid: d76e574f01707204a9eca7ffc4852fd4,
+    type: 2}
+  waveSpeed: 0
+  spawnOffset: 0
 --- !u!135 &135000010154963672
 SphereCollider:
   m_ObjectHideFlags: 1

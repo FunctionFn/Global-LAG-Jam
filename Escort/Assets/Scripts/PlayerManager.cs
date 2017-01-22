@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour {
 
@@ -9,6 +10,10 @@ public class PlayerManager : MonoBehaviour {
 
 
     public PlayerController[] Players;
+
+    public Image[] wins;
+
+    public Image gameover;
 
     void Awake()
     {
@@ -20,7 +25,7 @@ public class PlayerManager : MonoBehaviour {
 	    
 	}
 
-    public int GetWinners()
+    public void GetWinners()
     {
         float max = Players[0].grabTime;
         int maxp = 0;
@@ -34,6 +39,11 @@ public class PlayerManager : MonoBehaviour {
             }
         }
 
-        return maxp;
+        wins[maxp].enabled = true;
+    }
+
+    public void GameOver()
+    {
+        gameover.enabled = true;
     }
 }

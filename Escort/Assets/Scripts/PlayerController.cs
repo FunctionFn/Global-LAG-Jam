@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         holding = false;
 
-        Physics.IgnoreLayerCollision(8, gameObject.layer);
+        //Physics.IgnoreLayerCollision(8, gameObject.layer);
 
         willFire = false;
     }
@@ -230,6 +230,7 @@ public class PlayerController : MonoBehaviour
             {
                 grabBox.GetComponent<GrabBox>().SetActive(true);
                 GrabTimer = GrabTime;
+                
             }
             else if (Input.GetButtonDown("Fire" + PlayerNumber))
             {

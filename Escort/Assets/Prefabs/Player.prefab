@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013151245776}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: PlayerCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000014131375244}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: MissileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - 4: {fileID: 4000014054865454}
   - 65: {fileID: 65000010560348608}
   - 114: {fileID: 114000013703221150}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: GrabBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012838728180}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: VIPSpot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   - 23: {fileID: 23000011018518370}
   - 114: {fileID: 114000012954887112}
   - 143: {fileID: 143000010940187226}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +1010,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012463685168}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1024,7 +1024,7 @@ Animator:
   m_GameObject: {fileID: 1000012926874986}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f148b5251a833b84586b81e935caa286, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 432c35dbcfd0b9142880667feff68e6a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1072,6 +1072,7 @@ MonoBehaviour:
   beingHeld: 0
   movementState: 0
   holder: {fileID: 0}
+  grabTime: 0
 --- !u!114 &114000013703221150
 MonoBehaviour:
   m_ObjectHideFlags: 1

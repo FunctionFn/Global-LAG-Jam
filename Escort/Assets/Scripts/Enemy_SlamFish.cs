@@ -23,7 +23,7 @@ public class Enemy_SlamFish : MonoBehaviour {
         jumpCount = 0;
 
         // Ignore enemy bullets
-        Physics.IgnoreLayerCollision(9, gameObject.layer);
+        //Physics.IgnoreLayerCollision(9, gameObject.layer);
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class Enemy_SlamFish : MonoBehaviour {
         }
 
         // Check if it's jump time
-        if (jumpTimer >= 200)
+        if (jumpTimer >= 100)
         {
             // Check if Slamming
             if (jumpCount >= 2)
@@ -92,7 +92,7 @@ public class Enemy_SlamFish : MonoBehaviour {
 
     void SlamWave()
     {
-        Instantiate(wave, transform.position, transform.rotation);
+        Instantiate(wave, transform.position, Quaternion.Euler(Vector3.zero));
         isSlamming = false;
     }
 

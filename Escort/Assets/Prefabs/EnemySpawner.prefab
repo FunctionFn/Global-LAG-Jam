@@ -35,8 +35,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012802613358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.53, y: 1.26, z: 6.34}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.3, y: -3.92, z: 13.42}
+  m_LocalScale: {x: 0.99999964, y: 0.9999999, z: 1.0000004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   crabEnemy: {fileID: 1000012167277768, guid: a4767e41a8095e84da7c550d20e00efe, type: 2}
   fishEnemy: {fileID: 1000013142981554, guid: 4bd6134710b286546904318ad86b3fc6, type: 2}
   vip: {fileID: 0}
-  spawnMaxTime: 400
+  spawnMaxTime: 305
 --- !u!114 &114000012171879178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,5 +72,6 @@ MonoBehaviour:
   missileSpawnLocation: {fileID: 0}
   speed: 0.025
   turnSpeed: 0.5
-  missileSpeed: 5
+  missileSpeed: 6.06
   FireTime: 150
+  contactDamage: 0

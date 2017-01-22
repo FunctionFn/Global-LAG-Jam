@@ -36,6 +36,7 @@ public class CameraMovement : MonoBehaviour {
         }
         else
         {
+            PlayerManager.Inst.GetWinners();
         }
 	}
 }

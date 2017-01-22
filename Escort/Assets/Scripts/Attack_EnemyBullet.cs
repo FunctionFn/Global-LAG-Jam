@@ -9,7 +9,7 @@ public class Attack_EnemyBullet : MonoBehaviour
 
     void Start()
     {
-        Physics.IgnoreLayerCollision(10, gameObject.layer);
+        //Physics.IgnoreLayerCollision(10, gameObject.layer);
     }
 
     // Update is called once per frame
