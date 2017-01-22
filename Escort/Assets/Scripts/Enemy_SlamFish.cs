@@ -85,7 +85,7 @@ public class Enemy_SlamFish : MonoBehaviour {
     void SlamJump()
     {
         // Slam Jump!
-        GetComponent<Rigidbody>().AddForce(transform.up * jumpHeight * 2);
+        GetComponent<Rigidbody>().AddForce(Vector3.up * jumpHeight * 2);
 
         isSlamming = true;
     }

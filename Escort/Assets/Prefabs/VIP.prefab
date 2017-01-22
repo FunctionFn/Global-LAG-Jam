@@ -24,6 +24,7 @@ GameObject:
   - 23: {fileID: 23000011326976206}
   - 114: {fileID: 114000010561264070}
   - 54: {fileID: 54000012033833300}
+  - 114: {fileID: 114000013534995346}
   m_Layer: 0
   m_Name: VIP
   m_TagString: Untagged
@@ -37,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010919667752}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.72, z: 2.18}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.652895, y: 1.5, z: 7.3655586}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -106,6 +107,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8af0b0ea9a0204bbbb1df1b321728b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  held: 0
+--- !u!114 &114000013534995346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010919667752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81754e1ea6dbae9429e765fbed4590e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  getUpMaxTime: 200
 --- !u!136 &136000011161639686
 CapsuleCollider:
   m_ObjectHideFlags: 1

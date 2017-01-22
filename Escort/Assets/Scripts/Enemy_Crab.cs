@@ -32,7 +32,8 @@ public class Enemy_Crab : MonoBehaviour {
 	void Update ()
     {
         // Move towards target
-        Vector3 targetDir = target.transform.position - transform.position;
+        Vector3 targetDir = new Vector3(target.transform.position.x, 0, target.transform.position.z)
+                          - new Vector3(transform.position.x, 0, transform.position.z);
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed);
         transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDir, turnSpeed, 0.0F));
 
