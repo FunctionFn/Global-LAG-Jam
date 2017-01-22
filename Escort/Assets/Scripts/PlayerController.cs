@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour
 
     // Singleton Pattern
 
+    public float grabTime;
+
 
     void Awake()
     {
@@ -266,6 +268,7 @@ public class PlayerController : MonoBehaviour
                 p.GetComponent<Rigidbody>().isKinematic = true;
                 p.held = true;
 
+                grabTime = Time.time;
 
             }
             else if(p.GetComponent<CharacterController>())
