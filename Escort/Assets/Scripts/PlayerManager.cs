@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour {
 
@@ -22,7 +23,10 @@ public class PlayerManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-	    
+	    if(Input.GetButtonDown("Submit"))
+        {
+            SceneManager.LoadScene(0);
+        }
 	}
 
     public void GetWinners()

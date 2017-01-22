@@ -55,7 +55,7 @@ MonoBehaviour:
   crabEnemy: {fileID: 1000012167277768, guid: a4767e41a8095e84da7c550d20e00efe, type: 2}
   fishEnemy: {fileID: 1000013142981554, guid: 4bd6134710b286546904318ad86b3fc6, type: 2}
   vip: {fileID: 0}
-  spawnMaxTime: 305
+  spawnMaxTime: 166
 --- !u!114 &114000012171879178
 MonoBehaviour:
   m_ObjectHideFlags: 1

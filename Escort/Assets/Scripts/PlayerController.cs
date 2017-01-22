@@ -31,12 +31,14 @@ public class PlayerController : MonoBehaviour
     public float GrabTime;
     public float DeathStunTime;
     public float MaxHoldTime;
+    public float iTime;
 
     float angle;
     public float FireTimer;
     public float GrabTimer;
     public float StunTimer;
     public float HoldTimer;
+    public float iTimer;
     
     public Vector3 moveDirection = Vector3.zero;
 
@@ -78,6 +80,8 @@ public class PlayerController : MonoBehaviour
         //Physics.IgnoreLayerCollision(8, gameObject.layer);
 
         willFire = false;
+
+        float grabTime = 0.0f;
     }
 
     // Update is called once per frame
@@ -98,6 +102,7 @@ public class PlayerController : MonoBehaviour
         GrabTimer -= Time.deltaTime;
         HoldTimer -= Time.deltaTime;
         StunTimer -= Time.deltaTime;
+        iTimer -= Time.deltaTime;
         if(GrabTimer <= 0)
         {
             if(grabBox.GetComponent<GrabBox>().isactive)
@@ -291,8 +296,13 @@ public class PlayerController : MonoBehaviour
     public void Chuck()
     {
         Vector3 throwmove = new Vector3(moveDirection.x, 0, moveDirection.z) * .5f;
+        if(heldObject)
+            heldObject.gameObject.transform.SetParent(null);
+        else
+        {
+            holding = false;
 
-        heldObject.gameObject.transform.SetParent(null);
+        }
 
         if (heldObject.GetComponent<Rigidbody>())
         {
@@ -352,14 +362,19 @@ public class PlayerController : MonoBehaviour
 
     public void Damage(int dmg)
     {
-        currentHealth -= dmg;
+        if(iTimer <= 0)
+            currentHealth -= dmg;
     }
 
     public void Stun(float time, bool force = false)
     {
+        iTimer = iTime;
         ChangeMovementState(State.NoMovement);
-        if((time <= StunTimer || StunTimer <= 0) || force)
+        if ((time <= StunTimer || StunTimer <= 0) || force)
+        {
             StunTimer = time;
+            
+        }
         if(holding)
             Chuck();
         
