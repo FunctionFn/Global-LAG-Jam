@@ -9,8 +9,15 @@ public class Attack_EnemyWave : MonoBehaviour {
 
     public int contactDamage = 1;
 
-	// Use this for initialization
-	void Start ()
+    public int numProjectiles;
+
+    public GameObject missilePrefab;
+    public float waveSpeed;
+
+    public float spawnOffset;
+
+    // Use this for initialization
+    void Start ()
     {
         StartWave();
 	}
@@ -30,6 +37,25 @@ public class Attack_EnemyWave : MonoBehaviour {
     public void StartWave (/*Vector3 pos*/)
     {
         waveTimer = 0;
+
+        float angle = 0;
+
+        float increment = 2 * Mathf.PI / numProjectiles;
+
+        for (int i = 0; i < numProjectiles; ++i)
+        {
+            float x = Mathf.Cos(angle);
+            float y = Mathf.Sin(angle);
+
+            Vector3 forward = new Vector3(x, 0, y);
+
+            GameObject go = (GameObject)Instantiate(missilePrefab, transform.position + forward * spawnOffset, Quaternion.Euler(forward));
+            //go.GetComponent<MeshRenderer>().enabled = false;
+            go.GetComponent<Rigidbody>().velocity = forward * waveSpeed;
+
+            angle += increment;
+        }
+
     }
 
     void OnCollisionEnter(Collision other)

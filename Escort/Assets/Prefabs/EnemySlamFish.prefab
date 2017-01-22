@@ -118,6 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9b92c92ed1ae04195e45d7f06988c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave: {fileID: 1000010921873144, guid: 835b04f9671b3ac48bfa5c45aeede06a, type: 2}
+  wave: {fileID: 1000013150569190, guid: a6a1ca4138557a848b29822db06d2ba0, type: 2}
   jumpHeight: 200
   contactDamage: 10
