@@ -133,6 +133,7 @@ public class PlayerController : MonoBehaviour
         if(movementState == State.NoMovement && state != State.NoMovement)
         {
             Destroy(gameObject.GetComponent<Pickupable>());
+            transform.parent = null;
         }
 
         movementState = state;
@@ -140,6 +141,7 @@ public class PlayerController : MonoBehaviour
         if(movementState == State.NoMovement && !gameObject.GetComponent<Pickupable>())
         {
             gameObject.AddComponent<Pickupable>();
+            transform.parent = mainCamera.transform;
         }
 
     }

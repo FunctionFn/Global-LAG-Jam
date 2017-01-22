@@ -167,7 +167,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
@@ -715,7 +715,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
@@ -872,6 +872,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 05d1ef48db751ea45accd438c0396baa, type: 2}
+    - target: {fileID: 114000012954887112, guid: ee7fb44df6e088547930253eee6cdc28,
+        type: 2}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1547783542}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee7fb44df6e088547930253eee6cdc28, type: 2}
   m_IsPrefabParent: 0
@@ -1110,7 +1115,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
@@ -1421,7 +1426,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
@@ -1803,7 +1808,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
@@ -2069,7 +2074,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
@@ -2151,7 +2156,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
@@ -2214,6 +2219,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9200c6a004f8e2049b084338584c613e, type: 2}
+    - target: {fileID: 114000012954887112, guid: ee7fb44df6e088547930253eee6cdc28,
+        type: 2}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1547783542}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee7fb44df6e088547930253eee6cdc28, type: 2}
   m_IsPrefabParent: 0
@@ -2515,7 +2525,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
@@ -2709,7 +2719,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
@@ -2843,6 +2853,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5f0c906fd80de48449562b64121e6888, type: 2}
+    - target: {fileID: 114000012954887112, guid: ee7fb44df6e088547930253eee6cdc28,
+        type: 2}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1547783542}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee7fb44df6e088547930253eee6cdc28, type: 2}
   m_IsPrefabParent: 0
@@ -3435,7 +3450,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a629634dd6f000a43a2fe64ac0709b62, type: 3}

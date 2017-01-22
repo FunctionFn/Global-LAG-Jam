@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.GetComponent<Enemy_SlamFish>() || other.gameObject.GetComponent<Enemy_Crab>())
         {
