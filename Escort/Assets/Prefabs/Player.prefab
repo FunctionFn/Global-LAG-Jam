@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012463685168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.73, y: 1.66, z: 0}
+  m_LocalPosition: {x: -4.83, y: 1.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -246,14 +246,22 @@ MonoBehaviour:
   missileSpawnLocation: {fileID: 4000014131375244}
   VIPHoldLocation: {fileID: 4000012838728180}
   throwForce: 723.06
-  speed: 10
+  speed: 7
   airSpeedModifier: 0.75
   missileSpeed: 35
-  FireTime: 0.5
-  GrabTime: 0.5
+  FireTime: 0.32
+  GrabTime: 0.17
+  DeathStunTime: 5
+  MaxHoldTime: 3
+  FireTimer: 0
+  GrabTimer: 0
+  StunTimer: 0
+  HoldTimer: 0
   moveDirection: {x: 0, y: 0, z: 0}
   heldObject: {fileID: 0}
+  beingHeld: 0
   movementState: 0
+  holder: {fileID: 0}
 --- !u!114 &114000013703221150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 114000012954887112}
-  active: 0
+  isactive: 0
 --- !u!143 &143000010940187226
 CharacterController:
   m_ObjectHideFlags: 1

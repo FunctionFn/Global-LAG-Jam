@@ -22,4 +22,14 @@ public class Bullet : MonoBehaviour
     {
 
     }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.GetComponent<Enemy_SlamFish>() || other.gameObject.GetComponent<Enemy_Crab>())
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+
+    }
 }

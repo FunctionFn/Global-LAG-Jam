@@ -11,7 +11,9 @@ public class Enemy_SlamFish : MonoBehaviour {
     private int jumpCount;
 
     private bool grounded = true;
-    private bool isSlamming = false;  
+    private bool isSlamming = false;
+
+    public int contactDamage;
 
     // Use this for initialization
     void Start ()
@@ -94,8 +96,14 @@ public class Enemy_SlamFish : MonoBehaviour {
         isSlamming = false;
     }
 
-    void OnCollisionEnter()
+    void OnCollisionEnter(Collision other)
     {
         grounded = true;
+
+        if(other.gameObject.GetComponent<PlayerController>())
+        {
+            other.gameObject.GetComponent<PlayerController>().Damage(contactDamage);
+            Destroy(gameObject);
+        }
     }
 }
