@@ -263,6 +263,8 @@ public class PlayerController : MonoBehaviour
 
                 p.GetComponent<Rigidbody>().isKinematic = true;
                 p.held = true;
+
+
             }
             else if(p.GetComponent<CharacterController>())
             {
@@ -292,10 +294,16 @@ public class PlayerController : MonoBehaviour
             heldObject.GetComponent<Rigidbody>().AddForce(playerCenter.forward * throwForce + throwmove);
             heldObject.held = false;
             holding = false;
+
+            if (heldObject.gameObject.GetComponent<VIP>())
+            {
+                heldObject.gameObject.GetComponent<VIP>().GetUp();
+            }
+
         }
         else if(heldObject.GetComponent<CharacterController>())
         {
-            Vector3 vel = playerCenter.forward * throwForce + throwmove;
+            //Vector3 vel = playerCenter.forward * throwForce + throwmove;
             heldObject.GetComponent<CharacterController>().enabled = false;
             heldObject.gameObject.AddComponent<Rigidbody>();
             heldObject.GetComponent<Rigidbody>().AddForce(playerCenter.forward * throwForce + throwmove);
