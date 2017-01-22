@@ -15,6 +15,7 @@ public class Enemy_Crab : MonoBehaviour {
 
     public float FireTime = 150.0f;
 
+    public int contactDamage;
 
     private float FireTimer;
 
@@ -48,5 +49,14 @@ public class Enemy_Crab : MonoBehaviour {
         }
 
         FireTimer--;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.GetComponent<PlayerController>())
+        {
+            other.gameObject.GetComponent<PlayerController>().Damage(contactDamage);
+            Destroy(gameObject);
+        }
     }
 }
