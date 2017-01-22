@@ -7,6 +7,11 @@ public class Attack_EnemyBullet : MonoBehaviour
     //public ParticleSystem hitPC;
     public int dmg;
 
+    void Start()
+    {
+        Physics.IgnoreLayerCollision(10, gameObject.layer);
+    }
+
     // Update is called once per frame
     void Update()
     {

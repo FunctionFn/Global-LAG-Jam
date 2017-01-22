@@ -5,7 +5,10 @@ public class Bullet : MonoBehaviour
 {
 
     //public ParticleSystem hitPC;
-
+    void Start()
+    {
+        Physics.IgnoreLayerCollision(10, gameObject.layer);
+    }
 
     // Update is called once per frame
     void Update()
@@ -23,7 +26,7 @@ public class Bullet : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.GetComponent<Enemy_SlamFish>() || other.gameObject.GetComponent<Enemy_Crab>())
         {
