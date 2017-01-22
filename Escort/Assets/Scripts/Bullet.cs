@@ -5,7 +5,10 @@ public class Bullet : MonoBehaviour
 {
 
     //public ParticleSystem hitPC;
-
+    void Start()
+    {
+        Physics.IgnoreLayerCollision(10, gameObject.layer);
+    }
 
     // Update is called once per frame
     void Update()
