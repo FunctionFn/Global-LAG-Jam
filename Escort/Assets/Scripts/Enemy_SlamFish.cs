@@ -92,7 +92,7 @@ public class Enemy_SlamFish : MonoBehaviour {
 
     void SlamWave()
     {
-        Instantiate(wave, transform.position, transform.rotation);
+        Instantiate(wave, transform.position, Quaternion.Euler(Vector3.zero));
         isSlamming = false;
     }
 

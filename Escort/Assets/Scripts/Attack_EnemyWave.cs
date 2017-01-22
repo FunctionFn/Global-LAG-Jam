@@ -20,7 +20,7 @@ public class Attack_EnemyWave : MonoBehaviour {
     void Start ()
     {
         StartWave();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()
